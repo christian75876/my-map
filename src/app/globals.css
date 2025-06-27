@@ -1,4 +1,55 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+/* @config '../../tailwind.config.js'; */
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
+@layer base {
+  html,
+  body,
+  #__next {
+    @apply h-full w-full;
+  }
+}
+
+@font-face {
+  font-family: 'Urbanist';
+  src: url('/fonts/urbanist/Urbanist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Urbanist';
+  src: url('/fonts/urbanist/Urbanist-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Urbanist';
+  src: url('/fonts/urbanist/Urbanist-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Urbanist';
+  src: url('/fonts/urbanist/Urbanist-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Urbanist';
+  src: url('/fonts/urbanist/Urbanist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --background: #ffffff;
@@ -23,4 +74,76 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@theme {
+  --color-primary: #1e3a8a; /* Indigo oscuro */
+  --color-primary-light: #3b82f6; /* Azul calmado */
+  --color-primary-dark: #1e40af; /* Azul más profundo */
+
+  --color-secondary: #0f766e; /* Verde petróleo */
+  --color-secondary-light: #2dd4bf; /* Verde aqua tenue */
+  --color-secondary-dark: #0d4c48; /* Verde oscuro serio */
+
+  --color-accent: #d97706; /* Ámbar oscuro */
+  --color-accent-dark: #92400e; /* Ámbar profundo */
+
+  --color-neutral-white: #f3f4f6; /* Gris claro para mejor contraste */
+  --color-neutral-dark: #111827; /* Casi negro */
+  --color-neutral-gray: #374151; /* Gris medio para bordes */
+
+  --color-background: #1f2937; /* Azul gris oscuro para fondo claro */
+  --color-background-dark: #0b1120; /* Fondo oscuro real */
+
+  --color-green-success: #10b981; /* Verde esmeralda */
+
+  --font-urbanist: 'Urbanist', sans-serif;
+
+  /* Tema oscuro por defecto */
+  --theme-bg: var(--color-background-dark);
+  --theme-text: var(--color-neutral-white);
+  --theme-border: var(--color-neutral-gray);
+  --theme-card: var(--color-neutral-dark);
+  --theme-input: var(--color-neutral-dark);
+}
+
+/* Modo claro */
+@layer theme {
+  :root[data-theme='light'] {
+    --theme-bg: var(--color-background);
+    --theme-text: var(--color-neutral-dark);
+    --theme-border: var(--color-neutral-gray);
+    --theme-card: var(--color-neutral-white);
+    --theme-input: var(--color-neutral-white);
+  }
+}
+
+/* Animación pulse para marcador */
+.mapboxgl-marker .pulse {
+  width: 20px;
+  height: 20px;
+  background: #3b82f6; /* azul */
+  border-radius: 50%;
+  position: relative;
+}
+
+.mapboxgl-marker .pulse::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.5);
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
 }
