@@ -11,13 +11,6 @@ import dynamic from 'next/dynamic';
 import PanoramaScene from '@/features/map/components/PanoramaViewer';
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
-const PanoramaViewer = dynamic(
-  () => import('@/features/map/components/PanoramaViewer'),
-  {
-    ssr: false,
-    loading: () => <p>Cargando visor...</p>
-  }
-);
 
 export const Map = () => {
   const { mapRef, mapInstance } = useMap();

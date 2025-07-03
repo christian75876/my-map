@@ -3,4 +3,7 @@ export const API_BASE_URL =
 
 export const MAPBOX_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
+export const OPEN_WEATHER_MAP_API_KEY =
+  process.env.NEXT_PUBLIC_OPEN_WEATHER_MAP_API_KEY;
+
 export const APP_NAME = 'Map Explorer';

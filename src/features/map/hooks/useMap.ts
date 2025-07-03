@@ -2,7 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { MAPBOX_ACCESS_TOKEN } from '@/lib/constants/config';
+import {
+  MAPBOX_ACCESS_TOKEN,
+  OPEN_WEATHER_MAP_API_KEY
+} from '@/lib/constants/config';
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
@@ -68,6 +71,22 @@ export const useMap = () => {
         }
       });
 
+      map.addSource('weather-precipitation', {
+        type: 'raster',
+        tiles: [
+          `https://tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png?appid=${OPEN_WEATHER_MAP_API_KEY}`
+        ],
+        tileSize: 256
+      });
+
+      map.addLayer({
+        id: 'weather-precipitation-layer',
+        type: 'raster',
+        source: 'weather-precipitation',
+        paint: {
+          'raster-opacity': 0.6
+        }
+      });
       map.addLayer({
         id: 'line',
         source: 'line',
