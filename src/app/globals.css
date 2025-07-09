@@ -1,15 +1,4 @@
 @import 'tailwindcss';
-@import 'tw-animate-css';
-/* @config '../../tailwind.config.js'; */
-@import 'mapbox-gl/dist/mapbox-gl.css';
-
-@layer base {
-  html,
-  body,
-  #__next {
-    @apply h-full w-full;
-  }
-}
 
 @font-face {
   font-family: 'Urbanist';
@@ -52,50 +41,25 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --color-primary: #166534;
+  --color-primary-light: #22c55e;
+  --color-primary-dark: #14532d;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-secondary: #38bdf8;
+  --color-secondary-light: #bae6fd;
+  --color-secondary-dark: #1e3a8a;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  --color-accent: #f59e0b;
+  --color-accent-dark: #92400e;
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+  --color-neutral-white: #ffffff;
+  --color-neutral-dark: #111827;
+  --color-neutral-gray: #6b7280;
 
-@theme {
-  --color-primary: #1e3a8a; /* Indigo oscuro */
-  --color-primary-light: #3b82f6; /* Azul calmado */
-  --color-primary-dark: #1e40af; /* Azul más profundo */
+  --color-background: #f0fdf4;
+  --color-background-dark: #052e16;
 
-  --color-secondary: #0f766e; /* Verde petróleo */
-  --color-secondary-light: #2dd4bf; /* Verde aqua tenue */
-  --color-secondary-dark: #0d4c48; /* Verde oscuro serio */
-
-  --color-accent: #d97706; /* Ámbar oscuro */
-  --color-accent-dark: #92400e; /* Ámbar profundo */
-
-  --color-neutral-white: #f3f4f6; /* Gris claro para mejor contraste */
-  --color-neutral-dark: #111827; /* Casi negro */
-  --color-neutral-gray: #374151; /* Gris medio para bordes */
-
-  --color-background: #1f2937; /* Azul gris oscuro para fondo claro */
-  --color-background-dark: #0b1120; /* Fondo oscuro real */
-
-  --color-green-success: #10b981; /* Verde esmeralda */
+  --color-green-success: #10b981;
 
   --font-urbanist: 'Urbanist', sans-serif;
 
@@ -107,43 +71,69 @@ body {
   --theme-input: var(--color-neutral-dark);
 }
 
-/* Modo claro */
-@layer theme {
-  :root[data-theme='light'] {
-    --theme-bg: var(--color-background);
-    --theme-text: var(--color-neutral-dark);
-    --theme-border: var(--color-neutral-gray);
-    --theme-card: var(--color-neutral-white);
-    --theme-input: var(--color-neutral-white);
+:root[data-theme='light'] {
+  --theme-bg: var(--color-background);
+  --theme-text: var(--color-neutral-dark);
+  --theme-border: var(--color-neutral-gray);
+  --theme-card: var(--color-neutral-white);
+  --theme-input: var(--color-neutral-white);
+}
+
+/* styles.css */
+@layer utilities {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  /* Agrega más clases según tus necesidades */
+}
+
+@layer utilities {
+  @layer utilities {
+    .gradient-left {
+      background: linear-gradient(
+        to right,
+        var(--color-secondary) 10%,
+        /* Azul claro */ var(--color-secondary-light) 30%,
+        /* Azul medio */ var(--color-primary) 60%,
+        /* Morado principal */ var(--color-primary-dark) 90% /* Morado oscuro */
+      );
+      opacity: 50%;
+    }
+  }
+
+  .gradient-right {
+    background: linear-gradient(
+      to bottom,
+      var(--color-background-purple),
+      var(--color-background),
+      var(--color-neutral-white)
+    );
   }
 }
 
-/* Animación pulse para marcador */
-.mapboxgl-marker .pulse {
-  width: 20px;
-  height: 20px;
-  background: #3b82f6; /* azul */
-  border-radius: 50%;
-  position: relative;
+@layer utilities {
+  .gradient-dashboard {
+    background: linear-gradient(
+      to bottom right,
+      #eafdff,
+      /* Azul primario en la esquina superior izquierda */ #f3e7fe,
+      /* Morado intermedio */ #f3e7fb /* Rosado/Morado pastel */
+    );
+  }
 }
 
-.mapboxgl-marker .pulse::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: rgba(59, 130, 246, 0.5);
-  animation: pulse-ring 1.5s ease-out infinite;
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2.5);
-    opacity: 0;
-  }
+/*Primary Color calendar*/
+.rdp-root {
+  --rdp-accent-color: var(
+    --color-primary
+  ) !important  ; /* Change the accent color to indigo. */
 }
